@@ -1,0 +1,20 @@
+{
+  "name": "blog",
+  "description": "",
+  "main": "",
+  "authors": [
+    "zhoubo <mousetom91@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.1.1"
+  }
+}
