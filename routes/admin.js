@@ -5,7 +5,7 @@ var userDao = require('../dao/userDao');
 /* GET users listing. */
 //后台管理首页
 router.get('/', function(req, res, next) {
-    res.render('./admin/index');
+    res.render('./admin/login');
 });
 
 /* GET users listing. */
@@ -34,23 +34,27 @@ router.post("/updateuser",function (req,res,next) {
     userDao.update(req,res,next);
 });
 
-router.post("/login",function (req,res,next) {
+router.get("/login",function (req,res,next) {
     //登录判断
-    let result = userDao.queryByName(req,res,next);
-    let name = req.query.name || req.params.name;
-    if(!result.length || !result){
-        res.json({
-            code:200,
-            message:"数据库查询失败，请重试"
-        })
+    let parma = req.query || req.params;
+    console.log(parma);
+    console.log(console);
+    if(parma.name == 'admin' && parma.password == 'admin'){
+        res.render('./admin/index',{
+            loginInfo:{
+                name:"admin",
+                id:"1"
+            }
+        });
+
     }else{
-        console.log(result);
-        console.log(typeof result);
+        res.json({
+            code:0,
+            message:'登录错误！'
+        });
     }
-    res.json({
-        code:200,
-        message:"nihaoa"
-    })
 });
+
+
 
 module.exports = router;

@@ -9,7 +9,26 @@
     <link rel="stylesheet" href="/admin/stylesheets/index.css">
 </head>
 <body>
-<h1><%= loginInfo.name %></h1>
+<div class="login-box">
+    <h1>欢迎登陆后台管理系统</h1>
+    <div class="left-box">
+        <form>
+            <div class="from-row">
+                <label>
+                    <span>用户名:</span>
+                    <input type="text" name="name">
+                </label>
+            </div>
+            <div class="from-row">
+                <label><span>密码：</span><input type="text" name="password"></label>
+            </div>
+            <div class="from-row">
+                <label><span>确认密码：</span><input type="text" name="resepass"></label>
+            </div>
+            <input type="submit" value="登录" class="submit" id="J_submit">
+        </form>
+    </div>
+</div>
 <script src="/lib/jQuery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
@@ -17,18 +36,18 @@
             e.stopPropagation();
             e.preventDefault();
 
-            var name = $("input[name='name']"),
-                password = $("input[name='password']"),
-                resepass = $("input[name='resepass']");
+            var name = $("input[name='name']").val(),
+                password = $("input[name='password']").val(),
+                resepass = $("input[name='resepass']").val();
             //输入值判断
             if(name == '' || password == '' || resepass == ''){
                 alert("您的输入不能为空！");
-                return;
+                return false;
             };
             //两次密码输入不一致
             if(password != resepass){
                 alert("两次密码输入不一致！");
-                return;
+                return false;
             }
 
             $.ajax({
@@ -39,12 +58,11 @@
                     password:password
                 },
                 success:function (e) {
-                    console.log(e);
-                    console.log(typeof e);
-                    for(var i = 0;i<e.length; i++){
-                        console.log(e[i].id);
-                        console.log(e[i].name);
-                        console.log(e[i].password);
+                    if(e.code == 0){
+                        //表示登录错误
+                        alert(e.message);
+                    }else{
+
                     }
                 }
             })

@@ -108,9 +108,14 @@ module.exports = {
     queryAll: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryByAll, function(err, result) {
-                console.log("输出查询的结果");
+                console.info("输出 查询结果 开始");
                 console.log(result);
-                return result;
+                console.info(typeof result);
+                console.log(result.length);
+                console.info("输出 查询结果 结束");
+                if(result){
+                    jsonWrite(res,result);
+                }
                 connection.release();
             });
         });
@@ -118,7 +123,15 @@ module.exports = {
     queryByName:function (req,res,next) {
         let parmas = req.query || req.params;
         pool.getConnection(function (err,connection) {
+            console.info("输出 name 参数 开始");
+            console.log(parmas.name);
+            console.info("输出 name 参数 结束");
             connection.query($sql.queryByName,parmas.name,function (err,result) {
+                console.info("输出 查询结果 开始");
+                console.log(result);
+                console.log(typeof result);
+                console.log(result);
+                console.info("输出 查询结果 结束");
                 if(result){
                     return result;
                 };
