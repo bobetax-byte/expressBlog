@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="login-box">
+    <h1><%= title %></h1>
     <h1>欢迎登陆后台管理系统</h1>
     <div class="left-box">
         <form>
@@ -20,7 +21,7 @@
                 </label>
             </div>
             <div class="from-row">
-                <label><span>密码：</span><input type="text" name="password"></label>
+                <label><span>密码：</span><input type="text" name="password" required></label>
             </div>
             <div class="from-row">
                 <label><span>确认密码：</span><input type="text" name="resepass"></label>
@@ -51,8 +52,8 @@
             }
 
             $.ajax({
-                url:"login",
-                type:"get",
+                url:"./login",
+                type:"post",
                 data:{
                     name:name,
                     password:password
@@ -62,7 +63,7 @@
                         //表示登录错误
                         alert(e.message);
                     }else{
-
+                        window.location.href = 'http://localhost:4000/admin/index';
                     }
                 }
             })

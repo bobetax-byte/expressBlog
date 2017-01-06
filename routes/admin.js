@@ -5,7 +5,9 @@ var userDao = require('../dao/userDao');
 /* GET users listing. */
 //后台管理首页
 router.get('/', function(req, res, next) {
-    res.render('./admin/login');
+    res.render('./admin/login',{
+        title:"Express"
+    });
 });
 
 /* GET users listing. */
@@ -34,26 +36,29 @@ router.post("/updateuser",function (req,res,next) {
     userDao.update(req,res,next);
 });
 
-router.get("/login",function (req,res,next) {
-    //登录判断
-    let parma = req.query || req.params;
+router.post("/login",function (req,res,next) {
+    let user = {
+        name:"admin",
+        password:"admin"
+    };
+    let parma = req.body || req.params;
     console.log(parma);
-    console.log(console);
-    if(parma.name == 'admin' && parma.password == 'admin'){
-        res.render('./admin/index',{
-            loginInfo:{
-                name:"admin",
-                id:"1"
-            }
-        });
-
-    }else{
-        res.json({
-            code:0,
-            message:'登录错误！'
-        });
-    }
+    if(parma.name == user.name && parma.password == user.password){
+        res.send({
+            code:1,
+            message:"信息比对成功！"
+        })
+    };
 });
+router.get('/index',function (req,res,next) {
+    let loginInfo = {
+        name:"admin",
+        password:"admin"
+    };
+    res.render('./admin/index',{
+        title:"Express"
+    })
+})
 
 
 
