@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userDao = require('../dao/userDao');
+var userDb = require("../dao/getIndexdb");
 
 /* GET users listing. */
 //后台管理首页
@@ -44,20 +45,23 @@ router.post("/login",function (req,res,next) {
     let parma = req.body || req.params;
     console.log(parma);
     if(parma.name == user.name && parma.password == user.password){
-        res.send({
-            code:1,
-            message:"信息比对成功！"
-        })
+        // res.send({
+        //     code:1,
+        //     message:"信息比对成功！"
+        // })
+        res.redirect('./index');
     };
 });
 router.get('/index',function (req,res,next) {
-    let loginInfo = {
-        name:"admin",
-        password:"admin"
-    };
-    res.render('./admin/index',{
-        title:"Express"
+    let client = userDb.createConnt();
+    userDb.getUsers(client,function (results) {
+        if(results){
+            res.render('./admin/index',{
+                results:results
+            })
+        }
     })
+
 })
 
 

@@ -9,66 +9,67 @@
     <link rel="stylesheet" href="/admin/stylesheets/index.css">
 </head>
 <body>
-<div class="container" id="box">
-    <div class="left-box"></div>
-    <div class="right-box">
-        <div class="table">
-            <table>
-                <thead>
-                <th>
-                    <td>id</td>
-                    <td>name</td>
-                    <td>password</td>
-                    <td>操作</td>
-                </th>
-                </thead>
-                <tbody>
-                <tr  v-for="item in items">
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.password}}</td>
-                    <td>
-                        <a href="#">修改</a><a href="">删除</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<h1><%= title %></h1>
-<script src="/lib/jQuery/dist/jquery.js"></script>
-<script src="/lib/vue/dist/vue.min.js"></script>
-<script>
-    var app = new Vue({
-        el:"#box",
-        data:{
-            items:[]
-        },
-        ready:function () {
-            $.ajax({
-                url:'./queryAll',
-                type:"get",
-                success:function (e) {
-                    app.data.items = e;
-                    console.log(app.data.items);
-                }
-            });
-        },
-        methods:{
-            getDate:function () {
-                $.ajax({
-                    url:'./queryAll',
-                    type:"get",
-                    success:function (e) {
-                        app.data.items = e;
-                        console.log(app.data.items);
-                    }
-                });
-            }
-        }
-    })
+<!--<div class="container" id="box">-->
+    <!--<div class="left-box"></div>-->
+    <!--<div class="right-box">-->
+        <!--<div class="table">-->
+            <!--<table>-->
+                <!--<thead>-->
+                <!--<th>-->
+                    <!--<td>id</td>-->
+                    <!--<td>name</td>-->
+                    <!--<td>password</td>-->
+                    <!--<td>操作</td>-->
+                <!--</th>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr  v-for="item in items">-->
+                    <!--<td>{{item.id}}</td>-->
+                    <!--<td>{{item.name}}</td>-->
+                    <!--<td>{{item.password}}</td>-->
+                    <!--<td>-->
+                        <!--<a href="#">修改</a><a href="">删除</a>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<h1><%= results %></h1>
 
-</script>
+<script src="/lib/jQuery/dist/jquery.js"></script>
+<!--<script src="/lib/vue/dist/vue.min.js"></script>-->
+<!--<script>-->
+    <!--var app = new Vue({-->
+        <!--el:"#box",-->
+        <!--data:{-->
+            <!--items:[]-->
+        <!--},-->
+        <!--ready:function () {-->
+            <!--$.ajax({-->
+                <!--url:'./queryAll',-->
+                <!--type:"get",-->
+                <!--success:function (e) {-->
+                    <!--app.data.items = e;-->
+                    <!--console.log(app.data.items);-->
+                <!--}-->
+            <!--});-->
+        <!--},-->
+        <!--methods:{-->
+            <!--getDate:function () {-->
+                <!--$.ajax({-->
+                    <!--url:'./queryAll',-->
+                    <!--type:"get",-->
+                    <!--success:function (e) {-->
+                        <!--app.data.items = e;-->
+                        <!--console.log(app.data.items);-->
+                    <!--}-->
+                <!--});-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+
+<!--</script>-->
 </body>
 </html>
